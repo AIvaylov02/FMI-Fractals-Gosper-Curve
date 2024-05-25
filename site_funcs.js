@@ -31,12 +31,7 @@ document.getElementsByTagName('button')[0].addEventListener('click', (e) => {
 
     const iterationsLevel = parseInt(document.getElementById("recursion-levels").value);
     const fractalColor = document.getElementById("lines-color").value;
-    if (gosperCurve !== null) { // била е вече конструирана с този размер, виж дали може да я надградиш, а да не я преизчисляваш (L системата)
-        drawer.clearRect(0, 0, canvas.width, canvas.height); // изчисти платното
-        // изчисти платното, доизчисли Л-системата и я нарисувай
-        gosperCurve = null;
-    }
     
     gosperCurve = new GosperCurve(iterationsLevel, fractalColor);
-    gosperCurve.drawGosperCurve();
+    gosperCurve.draw();
 })
