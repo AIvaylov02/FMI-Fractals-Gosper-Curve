@@ -1,0 +1,74 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin-top: 0;
+}
+
+header {
+    border-radius: 0 0 2rem 2rem;
+    width: 100%;
+    padding: 0.2rem;
+    margin: 0 auto rem;
+}
+
+header > h1, header > h2, header > h3 {
+    margin: 0;
+}
+
+section {
+    padding: 0.6rem;
+}
+
+.helper {
+    display: none;
+}
+
+form {
+    display: flex;
+}
+
+ul {
+    padding: 0.4rem;
+    width: 75%;
+}
+
+li {
+    padding: 0.4em 0 0 0;
+}
+
+label {
+    display: inline-block;
+    width: 27em;
+}
+
+input, select, option {
+    width: 9em;
+    padding: 0;
+}
+
+.color-picker-holder {
+    display: inline-block;
+}
+
+li:nth-child(5) {
+    padding-left: 8.2em;
+}
+
+li.color-picker-holder label {
+    width: 10em;
+}
+
+.color-picker-holder > input {
+    width: 3.5em;
+    height: 1.4em;
+}
+
+button {
+    width: 25%;
+}
+
+.fractals {
+    text-align: center;
+}

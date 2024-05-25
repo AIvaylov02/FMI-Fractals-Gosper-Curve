@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крива на Госпер</title>
+    <link rel="stylesheet" href="typography.css">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="color_scheme.css">
+    <script src="fractal_logic.js" defer></script>
+    <script src="site_funcs.js" defer></script>
+</head>
+<body>
+    <main>
+        <article>
+            <header>
+                <h1>Генератор на <span>криви на Гопсер</span></h1>
+                <h2>Курсова работа по Фрактали, летен семестър 2023/24 година</h2>
+                <h3>изготвена от Антоан Ивайлов</h3>
+            </header>
+            <section>
+                <p id="screen-size">Вашият текущ размер на екрана е</p>
+                
+                <p>
+                    С настоящия инструмент можете да промените, размера на генерираното изображение, както и желаното ниво на итериране на алгоритъма - също можете да 
+                    пипнете цвета на фона или линиите на фрактала, ако не Ви удовлетворяват. За да извършите тези действия, моля попълнете параметрите 
+                    по-долу, след което натиснете бутона "Генерирай фрактално изображение".
+                </p>
+
+                <p class="helper">
+                    *Забележка - имайте предвид, че за всяка итерация на изрисуването, се налага да се генерират по нови възлови 7 точки, тоест броят на нужните точки
+                    нараства с темповете на геометрична прогресия с начален член 1 (стартовата точка на кривата) и частно 7.
+                </p>
+                <form>
+                    <ul type="none">
+                        <li>
+                            <label for="image-size">Размери на изображението (в пиксели):</label>
+                            <select id="image-size" type="number">
+                                <option value="100">100 x 100</option>
+                                <option value="250">250 x 250</option>
+                                <option value="500">500 x 500</option>
+                                <option value="1000">1000 x 1000</option>
+                                <option value="2000">2000 x 2000</option>
+                            </select>
+                        </li>
+
+                        <li>
+                            <label for="recursion-levels">Ниво на итерация при генериране на фрактала:</label>
+                            <select id="recursion-levels">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                            </select>
+                        </li>
+
+                        <li class="color-picker-holder">
+                            <label for="lines-color">Цвят на линиите:</label>
+                            <input id="lines-color" type="color">
+                        </li>
+                        
+                        <li class="color-picker-holder">
+                            <label for="background-color">Цвят на фона:</label>
+                            <input id="background-color" type="color" value="#FFFFFF">
+                        </li>
+                    </ul>
+
+                    <button>Генерирай фрактално изображение!</button>
+                </form>
+            </section>
+
+            <section class="fractals">
+                <h3></h3>
+                <canvas></canvas>
+            </section>
+        </article>
+    </main>
+    <footer>
+        <section id="about-me">
+            <h3>За автора</h3>
+            <figure>
+                <img>
+            </figure>
+            <p>
+                Здравейте, казвам се Антоан Красимиров Ивайлов, специалност Софтуерно инженерство съм (трети курс) с факултетен номер 7MI0600129. 
+                От както влязох във Факултета, разбрах че има хора, които са къде, къде по-напред в математика и информатиката от мен, но съм амбициран да 
+                се уча - интересите ми са в алгоритми, структури от данни, шаблони за дизайн, криптография, вероятности и компютърна графика. 
+                Курса по фрактали го записах, поради зашеметяващо клипче в Ютуб (ЛИНК), което рисуваше красиви картини, сякаш от нищото - искаше ми се да 
+                разбера какво стои зад тях - е пропуските ми по ДИС, ЛААГ и дискретна математика си казват своето, затруднявайки максимално този процес, 
+                но аз вярвам, че ще мога да ги поизгладя в рамките на курса.
+            </p>
+        </section>
+        
+    </footer>
+</body>
+</html>

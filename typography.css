@@ -1,0 +1,40 @@
+html {
+    font-size: 22px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header > h1, header > h2, header > h3 {
+    text-align: center;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.8rem
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+li {
+    font-size: 1.2rem;
+}
+
+
+input, select, option {
+    font-size: 1.1rem;
+}
+
+button {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5rem;
+}

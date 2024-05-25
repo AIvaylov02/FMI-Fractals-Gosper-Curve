@@ -1,0 +1,27 @@
+/*
+Цветова схема:
+244855 -> тъмно синьо
+E64833 -> ярко оранжево
+874F41 -> кафяво
+90AEAD -> светло синьо
+FBE9D0 -> бежово
+*/
+
+body {
+    background-color: #FBE9D0;
+}
+
+header {
+    background-color: #244855;
+    color: #FFFFFF;
+}
+
+button {
+    background-color: #90AEAD;
+}
+
+canvas {
+    background-color: #FFF;
+    border: 0.3em solid black;
+    border-radius: 0.5em;
+}
