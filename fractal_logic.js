@@ -148,39 +148,34 @@ class GosperCurve {
         let initialInstructions = '';
 
         
-        let startTime;
-        let endTime;
+
         if (remainingIterations <= 0) {
-            let startTime = performance.now();
             initialInstructions = this.#expandSymbol(GosperCurve.startingAxiom, this.iterations);
             this.#drawGosperCurveByChunks(initialInstructions, chunkSize);
             drawer.stroke();
-            endTime = performance.now();
-            console.log(`Time taken for first 5 levels: ${(endTime - startTime) / 1000} seconds`);
             return;
         }
             
         initialInstructions = this.#expandSymbol(GosperCurve.startingAxiom, detailedLevel);
         // we have the initial dots, transform each one of them to detailed, draw it, and then go to the next dot
 
-        startTime = performance.now();
         for (const instruction of initialInstructions) {
             
             const singleDetailedInstruction = this.#expandSymbol(instruction, remainingIterations);
             this.#drawGosperCurveByChunks(singleDetailedInstruction, chunkSize);
             
         }
-        endTime = performance.now();
-        console.log(`Time taken for a full instruction of level 8: ${(endTime - startTime) / 1000} seconds`);
-        startTime = performance.now();
         drawer.stroke(); // запълни невидимите линии, които са останали, тъй като не са направили цяло парче
-        endTime = performance.now();
-        console.log(`Drawing took: ${(endTime - startTime) / 1000} seconds`);
     }
     
 
-    draw() {
-        drawer.clearRect(0, 0, canvas.width, canvas.height);
+    draw(backgroundColor) {
+        drawer.clearRect(0, 0, canvas.width, canvas.height); // изчиства цялата дъска
+        if (backgroundColor !== null) { // трябва да се добави фон
+            drawer.fillStyle = backgroundColor;
+            drawer.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
         drawer.strokeStyle = this.color;
         drawer.beginPath(); // влез в режим на чертаене, като започнеш да рисуваш векторна пътека
         this.curveDrawer.recalibrateDrawer(); // премести чертожника на кординати х и у (без да чертаеш линия)

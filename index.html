@@ -33,7 +33,7 @@
                     <ul type="none">
                         <li>
                             <label for="recursion-levels">Ниво на итерация при генериране на фрактала:</label>
-                            <select id="recursion-levels">
+                            <select id="recursion-levels" class="hoverable">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -44,26 +44,33 @@
                                 <option value="8">8</option>
                                 <option value="9">9</option>
                                 <option value="10">10</option>
-                                <option value="11">11</option>
                             </select>
                         </li>
 
                         <li class="color-picker-holder">
                             <label for="lines-color">Цвят на линиите:</label>
-                            <input id="lines-color" type="color">
+                            <input id="lines-color" class="hoverable" type="color">
                         </li>
                         
+                        <li id="bg-allower-container">
+                            <label for="put-background-color">Плътен ли да е фонът?</label>
+                            <input id="put-background-color" class="hoverable" type="checkbox" value="false">
+                        </li>
+
                         <li class="color-picker-holder">
                             <label for="background-color">Цвят на фона:</label>
-                            <input id="background-color" type="color" value="#FFFFFF">
+                            <input id="background-color" class="hoverable" type="color" value="#FFFFFF" disabled>
                         </li>
                     </ul>
 
-                    <button>Генерирай фрактално изображение!</button>
+                    <div id="buttons-holder">
+                        <button class="hoverable">Генерирай фрактал!</button>
+                        <button disabled>Изтегли изображението</button>
+                    </div>
                 </form>
             </section>
 
-            <section class="fractals">
+            <section id="fractal">
                 <h3></h3>
                 <canvas></canvas>
             </section>

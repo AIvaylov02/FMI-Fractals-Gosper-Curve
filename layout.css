@@ -31,29 +31,28 @@ form {
 
 ul {
     padding: 0.4rem;
-    width: 75%;
+    width: 85%;
 }
 
 li {
     padding: 0.4em 0 0 0;
+    overflow: hidden;
 }
 
 label {
     display: inline-block;
     width: 27em;
+    max-width: 100%;
 }
 
-input, select, option {
+input {
     width: 9em;
     padding: 0;
 }
 
-.color-picker-holder {
-    display: inline-block;
-}
-
-li:nth-child(5) {
-    padding-left: 8.2em;
+select, option {
+    width: 3em;
+    padding: 0;
 }
 
 li.color-picker-holder label {
@@ -65,10 +64,28 @@ li.color-picker-holder label {
     height: 1.4em;
 }
 
-button {
-    width: 25%;
+.color-picker-holder:nth-of-type(4) {
+    visibility: hidden;
 }
 
-.fractals {
+button {
+    width: 100%;
+    margin: 0.2em 0em;
+    padding: 0.6em 0;
+}
+
+#fractal {
     text-align: center;
+}
+
+#bg-allower-container label {
+    max-width: 35%;
+    min-width: 250px;
+}
+
+#bg-allower-container > input {
+    vertical-align: middle;
+    max-width: 1.2em;
+    height: 1.3em;
+    margin: 0.05em 2.8em 0.05em 0.05em;
 }

@@ -25,3 +25,9 @@ canvas {
     border: 0.3em solid black;
     border-radius: 0.5em;
 }
+
+button.hoverable:hover {
+    background-color: #E64833;
+    border: 0.15em solid black;
+    border-radius: 0.2em;
+}
