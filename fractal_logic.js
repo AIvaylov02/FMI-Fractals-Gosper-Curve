@@ -3,15 +3,17 @@ const drawer = canvas.getContext("2d");
 
 // ще се разхожда из платното, обработвайки буквите на граматиката
 class CurveDrawer {
-    constructor(x, y) {
+    constructor(x, y, lengthOfStep, drawingColour) {
         this.x = x;
         this.y = y;
         this.degrees = CurveDrawer.startingAngle;
+        this.lengthOfStep = lengthOfStep
+        drawer.strokeStyle = drawingColour;
     }
 
     static angleRotation = 60;
     static startingAngle = -90;
-    static lengthOfStep = 4; // 4 пиксела за мен е перфектната минимална дължина на линиите, така че те да са видими и при повече итерации (5+)
+    // 4 пиксела за мен е перфектната минимална дължина на линиите, така че те да са видими и при повече итерации (5+)
 
     interpretSymbol(symbol) {
         switch (symbol) {
@@ -38,9 +40,9 @@ class CurveDrawer {
 
     #moveByDrawing() {
         const calculatedAngle = this.degrees * Math.PI / 180;
-        const xMovement = CurveDrawer.lengthOfStep * Math.cos(calculatedAngle);
+        const xMovement = this.lengthOfStep * Math.cos(calculatedAngle);
         this.x += xMovement;
-        const yMovement = CurveDrawer.lengthOfStep * Math.sin(calculatedAngle);
+        const yMovement = this.lengthOfStep * Math.sin(calculatedAngle);
         this.y += yMovement;
         drawer.lineTo(this.x, this.y) // драсни невидима линия до кординати х и y        
     }
@@ -66,27 +68,56 @@ class GosperCurve {
         "B": "+A-BB--B-A++A+B"
     }
 
+    static stepCalculator = {
+        1: 190, // 500 x 500
+        2: 65,
+        3: 23,
+        4: 17.5, // 1000 x 1000
+        5: 13, // 2000 x 2000
+        6: 4.9,
+        7: 3.7, // 4000 x 4000
+        8: 2.8, // 8000 x 8000
+        9: 2.1, // 16k x 16k
+        10: 1.15 // 23k x 23k
+    }
+    // TODO level 11 - 23k is maximum canvas size
+    static startAdjuster = {
+        1: {x: 80, y: 490},
+        2: {x: 25, y: 365},
+        3: {x: 11, y: 270},
+        4: {x: 25, y: 360},
+        5: {x: 200, y: 440},
+        6: {x: 439, y: 210},
+        7: {x: 1450, y: 140},
+        8: {x: 4150, y: 130},
+        9: {x: 10880, y: 850},
+        10: {x: 18800, y: 3080}
+    }
+
     constructor(iterations, color) {
-        // think of the traversal as an DFS - we draw, when we reach the bottom layer of the grammar!
         this.iterations = iterations;
         this.color = color;
-        // TODO CHANGE THE STARTING POSITION OF DRAWER
-        this.curveDrawer = new CurveDrawer(canvas.width * 0.25, canvas.height * 0.25);
+        const lengthOfStep = GosperCurve.stepCalculator[iterations];
+        const startPosition = GosperCurve.startAdjuster[iterations];
+        this.curveDrawer = new CurveDrawer(startPosition.x, startPosition.y, lengthOfStep);
     }
 
     // Генерирай последователност от инструкции за изпълнение (Л-система), като подадеш нивото на итерация спрямо текущите инструкции
-    #expandSymbol(symbols, iterations) {
-        if (iterations === 0)
-            return symbols;
 
-        let expandedSymbols = '';
-        for (const currentSymbol of symbols) {
-            if (GosperCurve.rules.hasOwnProperty(currentSymbol))
-                expandedSymbols += GosperCurve.rules[currentSymbol]; // if it is A or B, it will be replaced by their sequence
-            else
-                expandedSymbols += currentSymbol; // stick with the + or -
+    #expandSymbol(symbols, iterations) {
+        let expandedSymbols = symbols;
+        for (let i = 0; i < iterations; i++) {
+
+            let thisIterationSymbols = '';
+            for (const currentSymbol of expandedSymbols) {
+                if (GosperCurve.rules.hasOwnProperty(currentSymbol))
+                    thisIterationSymbols += GosperCurve.rules[currentSymbol]; // if it is A or B, it will be replaced by their sequence
+                else
+                    thisIterationSymbols += currentSymbol; // stick with the + or -
+            }
+            expandedSymbols = thisIterationSymbols;
         }
-        return this.#expandSymbol(expandedSymbols, iterations - 1);
+        return expandedSymbols;
     }
 
     // one iteration generates around 15 symbols, so the function grows 15^iterations, which for powers 7 and 8 are around 170mil and 2.5 billion characters, each of which is UTF-16 (4 bytes), so about 10 billion bytes needed or 10 GB! This is enormous
@@ -150,7 +181,7 @@ class GosperCurve {
 
     draw() {
         drawer.clearRect(0, 0, canvas.width, canvas.height);
-        // TODO - resize this height and width of the constructor
+        drawer.strokeStyle = this.color;
         drawer.beginPath(); // влез в режим на чертаене, като започнеш да рисуваш векторна пътека
         this.curveDrawer.recalibrateDrawer(); // премести чертожника на кординати х и у (без да чертаеш линия)
         this.#drawGosperCurve();

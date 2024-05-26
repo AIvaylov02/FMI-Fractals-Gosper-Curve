@@ -1,25 +1,27 @@
-function updateWindowSizeText()
-{
-    let newSizeText = 'Вашият текущ размер на екрана е ';
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    newSizeText = `${newSizeText} ${width} x ${height}`;
-    document.getElementById('screen-size').innerText = newSizeText;
-}
-
-window.addEventListener('resize', updateWindowSizeText);
-document.addEventListener('DOMContentLoaded', updateWindowSizeText);
-
-const imageSizeNode = document.getElementById('image-size');
+const recursionLevelsNode = document.getElementById('recursion-levels');
 
 function updateCanvasSize() {
-    // TODO nullify the Gosper curve? if it has been drawn
-    canvas.width = parseInt(imageSizeNode.value);
-    canvas.height = parseInt(imageSizeNode.value);
-    // redraw gosper curve
+    const BASE_SIZE = 500;
+    let size = BASE_SIZE;
+    const iterationsLevel = parseInt(document.getElementById("recursion-levels").value);
+    if (iterationsLevel > 3)
+        size = BASE_SIZE * 2;
+    if (iterationsLevel > 4)
+        size = BASE_SIZE * 4;
+    if (iterationsLevel > 6)
+        size = BASE_SIZE * 8;
+    if (iterationsLevel > 7)
+        size = BASE_SIZE * 16;
+    if (iterationsLevel > 8)
+        size = BASE_SIZE * 32;
+    if (iterationsLevel > 9)
+        size = BASE_SIZE * 46;
+
+    canvas.width = parseInt(size);
+    canvas.height = parseInt(size);
 }
 
-imageSizeNode.addEventListener('change', updateCanvasSize); // добави слушател към промяна на размерите, за да оразмери чертожната дъска
+recursionLevelsNode.addEventListener('change', updateCanvasSize); // добави слушател към промяна на нивата на задълбоченост на фрактала, за да оразмери чертожната дъска
 updateCanvasSize();  // първоначално инициализиране на размера
 
 // направи бутона интерактивен, така че когато потребителят го натисне да стартира процеса по рисуване на фрактала
