@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--Генератор на Криви на Госпер, Антоан Красимиров Ивайлов, СИ курс 3, група 4, факултетен номер 7MI0600129-->
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крива на Госпер</title>
+    <link rel="stylesheet" href="building_materials/css/typography.css">
+    <link rel="stylesheet" href="building_materials/css/layout.css">
+    <link rel="stylesheet" href="building_materials/css/color_scheme.css">
+    <script src="building_materials/js/fractal_logic.js" defer></script>
+    <script src="building_materials/js/site_funcs.js" defer></script>
+</head>
+<body>
+    <main>
+        <article>
+            <header>
+                <h1>Генератор на <span>криви на Гопсер</span></h1>
+                <h2>Курсова работа по Фрактали, летен семестър 2023/24 година</h2>
+                <h3>изготвена от Антоан Ивайлов</h3>
+            </header>
+            <section>
+                <p>
+                    С настоящия инструмент можете да промените желаното <strong>ниво на итериране на алгоритъма</strong> - също сте способни да 
+                    пипнете <strong>цвета на линиите на фрактала</strong> или да <strong>добавите фон</strong>, ако не Ви удовлетворяват текущите настройки. 
+                    Ако решите да добавите фон, ще се появи нов бутон, чрез който да промените <strong>цвета му</strong> на Вашия желан такъв.
+                    За да извършите тези действия, моля попълнете параметрите по-долу, след което натиснете бутона <strong>"Генерирай фрактално изображение"</strong>.
+                    След като генерирате изображение, можете да го свалите локално на компютъра си чрез бутона <strong>"Изтегли изображението"</strong>.
+                    Тъй като фрактала и фонът се генерират на едно изображение, при промяна на която и да е от горните настройки, ще се наложи да генерирате
+                    наново изображението, ако искате да го визуализирате след промените и евентуално да го изтеглите.
+                </p>
+
+                <form>
+                    <ul type="none">
+                        <li>
+                            <label for="recursion-levels">Ниво на итерация при генериране на фрактала:</label>
+                            <select id="recursion-levels" class="hoverable">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </li>
+
+                        <li class="color-picker-holder">
+                            <label for="lines-color">Цвят на линиите:</label>
+                            <input id="lines-color" class="hoverable" type="color">
+                        </li>
+                        
+                        <li id="bg-allower-container">
+                            <label for="put-background-color">Плътен ли да е фонът?</label>
+                            <input id="put-background-color" class="hoverable" type="checkbox" value="false">
+                        </li>
+
+                        <li class="color-picker-holder">
+                            <label for="background-color">Цвят на фона:</label>
+                            <input id="background-color" class="hoverable" type="color" value="#FFFFFF" disabled>
+                        </li>
+                    </ul>
+
+                    <div id="buttons-holder">
+                        <button class="hoverable">Генерирай фрактал!</button>
+                        <button disabled>Изтегли изображението</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="fractal">
+                <h3></h3>
+                <canvas></canvas>
+            </section>
+        </article>
+    </main>
+    <footer>
+        <section id="about-me">
+            <h3>За автора</h3>
+            <div>
+                <figure>
+                    <img src="building_materials/author.png">
+                </figure>
+                <p>
+                    Здравейте, казвам се <strong>Антоан Красимиров Ивайлов</strong> от специалност <strong>"Софтуерно инженерство"</strong> (трети курс), 
+                    с факултетен номер <strong>7MI0600129</strong>. 
+                    От както влязох във Факултета, разбрах че има хора, които са къде, къде по-напред в математика и информатиката от мен, но съм амбициран да 
+                    се уча - интересите ми са в алгоритми, структури от данни, шаблони за дизайн, криптография, вероятности и компютърна графика. 
+                    Курса по фрактали го записах, поради 
+                    <a href="https://www.youtube.com/watch?v=a3XDry3EwiU" target="_blank">зашеметяващо клипче в Ютуб</a>
+                    , което рисуваше красиви картини, сякаш от нищото - искаше ми се да 
+                    разбера какво стои зад тях - е пропуските ми по ДИС, ЛААГ и дискретна математика си казаха своето по време на проекта, но се надявам
+                    крайния резултат, а именно този инструмент за криви на Госпер да Ви е харесал. Ако имате въпроси или препоръки, 
+                    можете да ми пишете по <a href="https://www.facebook.com/tonimen31" rel="author" target="_blank">Фейсбук</a> 
+                    или по пощата на адрес <a href=mailto:"akivaylov@uni-sofia.bg">akivaylov@uni-sofia.bg</a>. Ще се радвам да се запознаем и да работим заедно.
+                </p>
+            </div>
+        </section>
+    </footer>
+</body>
+</html>

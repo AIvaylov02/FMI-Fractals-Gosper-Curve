@@ -7,6 +7,8 @@ E64833 -> ярко оранжево
 FBE9D0 -> бежово
 */
 
+/* Генератор на Криви на Госпер, Антоан Красимиров Ивайлов, СИ курс 3, група 4, факултетен номер 7MI0600129 */
+
 body {
     background-color: #FBE9D0;
 }
@@ -14,6 +16,7 @@ body {
 header {
     background-color: #244855;
     color: #FFFFFF;
+    border-radius: 0 0 2rem 2rem;
 }
 
 button {
@@ -30,4 +33,12 @@ button.hoverable:hover {
     background-color: #E64833;
     border: 0.15em solid black;
     border-radius: 0.2em;
+}
+
+a {
+    color: #244855;
+}
+
+a:hover {
+    color: #E64833;
 }

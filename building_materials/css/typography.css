@@ -1,3 +1,5 @@
+/* Генератор на Криви на Госпер, Антоан Красимиров Ивайлов, СИ курс 3, група 4, факултетен номер 7MI0600129 */
+
 html {
     font-size: 22px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -49,4 +51,17 @@ button {
 
 button.hoverable:hover {
     font-size: 1.8em;
+}
+
+strong {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+a:hover {
+    font-size: 1.2em
+}
+
+#fractal {
+    text-align: center;
 }

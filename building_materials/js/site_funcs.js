@@ -1,9 +1,12 @@
+// Генератор на Криви на Госпер, Антоан Красимиров Ивайлов, СИ курс 3, група 4, факултетен номер 7MI0600129
+
 const recursionLevelsNode = document.getElementById('recursion-levels');
 const colorButton = document.getElementById('lines-color');
 const backgroundColorButton = document.getElementById('background-color');
 const buttons = document.getElementsByTagName('button');
 const fractalNode = document.getElementById('fractal');
 
+// деактивирай бутона за сваляне на изображение
 function disableDownloadButton() {
     // заключи бутона за сваляне
     buttons[1].disabled = true;
@@ -13,18 +16,17 @@ function disableDownloadButton() {
 colorButton.addEventListener('change', disableDownloadButton);
 backgroundColorButton.addEventListener('change', disableDownloadButton);
 
+// в зависимост от състоянието на включено/изключено използване на фон, го смени на другото
 function toggleBackgroundColorPicker() {
     if (backgroundColorButton.disabled) {
-        // show it
+        // покажи целия елемент за смяна на фона
         backgroundColorButton.disabled = false;
         backgroundColorButton.parentElement.style.visibility = 'visible';
     } else {
-        // hide the whole element
+        // скрий целия елемент за смяна на фона
         backgroundColorButton.parentElement.style.visibility = 'hidden';
         backgroundColorButton.disabled = true;
     }
-    
-    // анулирай бутона за сваляне на изображение
     disableDownloadButton();
 }
 
@@ -32,6 +34,7 @@ document.getElementById('put-background-color').addEventListener('click', toggle
 
 let gosperCurve = null;
 let currentlyDrawnCurve = null;
+// на база желаното ниво на итериране, обнови размера на дъската, зачисти я и зачисти текущо генерираната крива (освободи паметта), както и заглавието за кривата
 function updateCanvasSize() {
     const BASE_SIZE = 500;
     let size = BASE_SIZE;
@@ -61,6 +64,10 @@ function updateCanvasSize() {
     fractalNode.children[0].innerText = '';
 }
 
+recursionLevelsNode.addEventListener('change', updateCanvasSize);
+updateCanvasSize();  // първоначално инициализиране на размера
+
+// провери, дали новият фрактал е идентичен на предишно генерираният (ако са еднакви, няма да се генерира наново същата рисунка)
 function newFractalIsIdenticalToOldOne(iterationsLevel, fractalColor, backgroundColor) {
     const PARAMETERS_TO_CHECK = 3;
     let parametersMatching = 0;
@@ -75,9 +82,6 @@ function newFractalIsIdenticalToOldOne(iterationsLevel, fractalColor, background
     }
     return parametersMatching === PARAMETERS_TO_CHECK;
 }
-
-recursionLevelsNode.addEventListener('change', updateCanvasSize); // добави слушател към промяна на нивата на задълбоченост на фрактала, за да оразмери чертожната дъска
-updateCanvasSize();  // първоначално инициализиране на размера
 
 function getBackgroundColor() {
     let backgroundColor = null;
@@ -95,10 +99,11 @@ buttons[0].addEventListener('click', (e) => {
     const iterationsLevel = parseInt(recursionLevelsNode.value);
     const fractalColor = colorButton.value;
     
-    if (newFractalIsIdenticalToOldOne(iterationsLevel, fractalColor, backgroundColor)) // старият фрактал е идентичен на новия, няма смисъл да се генерира отново
+    // старият фрактал е идентичен на новия, няма смисъл да се генерира отново
+    if (newFractalIsIdenticalToOldOne(iterationsLevel, fractalColor, backgroundColor)) 
         return;
     
-    const startTime = performance.now();
+    const startTime = performance.now(); // измерва времето за начертаване на фрактала
     gosperCurve = new GosperCurve(iterationsLevel, fractalColor);
     gosperCurve.draw(backgroundColor);
     const endTime = performance.now();
@@ -115,10 +120,13 @@ buttons[0].addEventListener('click', (e) => {
         'fractalColor': fractalColor,
         'backgroundColor': backgroundColor
     }
+
+    // включи бутона за сваляне на изображението (направи го кликваем)
     buttons[1].disabled = false;
     buttons[1].classList.add('hoverable');
 })
 
+// свали текущата скица към .png изображение
 function exportCanvasToImage(e) {
     e.preventDefault();
     const image = canvas.toDataURL('image/png');
