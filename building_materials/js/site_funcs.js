@@ -128,6 +128,8 @@ buttons[0].addEventListener('click', (e) => {
 
 // свали текущата скица към .png изображение
 function exportCanvasToImage(e) {
+    // TODO имплементирай сваляне на изображение за големи фрактали (равни или имащи повече от 8 итерации)
+    // снимката, даже не трябва да е растерно, а векторно изображение, понеже иначе размера расте драстично
     e.preventDefault();
     const image = canvas.toDataURL('image/png');
     const link = document.createElement('a');
